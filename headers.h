@@ -17,9 +17,12 @@ struct opcodeTable {
         char mnemonic[10];
         char code[3];
 };
-
-
-
+typedef struct {
+    char name[128];   
+    int length;       
+    int address;       
+    int assigned;      
+} LiteralTable;
 
 typedef struct symbol_linked_list SYMBOL;
 typedef SYMBOL *SYMTAB;
