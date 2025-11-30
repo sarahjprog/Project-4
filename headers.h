@@ -17,8 +17,12 @@ struct opcodeTable {
         char mnemonic[10];
         char code[3];
 };
-
-
+// to handle opcode formats 
+struct Opcode {
+    char name[10];
+    int code;
+    int format;
+};
 
 
 typedef struct symbol_linked_list SYMBOL;
