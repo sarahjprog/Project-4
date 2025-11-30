@@ -69,3 +69,36 @@ int checkForOperand(SYMTAB MysymbolTable, char *operand) {
         return -1;
 }
 
+int addLiteral(const char *operand) {
+    if (!operand || operand[0] != '=') return -1;
+    for (int i = 0; i < litCount; i++) {
+        if (strcmp(LITTAB[i].value, operand) == 0) {
+            return i;   
+        }
+    }
+    strcpy(LITTAB[litCount].value, operand);
+
+      int len = 0;
+
+    if (operand[1] == 'C' && operand[2] == '\'') {
+        // Count characters inside quotes
+        const char *p = strchr(operand + 3, '\'');
+        if (!p) return -1;
+        len = p - (operand + 3);
+    }
+    else if (operand[1] == 'X' && operand[2] == '\'') {
+        const char *p = strchr(operand + 3, '\'');
+        if (!p) return -1;
+        int hexLen = p - (operand + 3);
+        len = hexLen / 2;
+    }
+    else {
+            return -1;
+    }
+
+    LITTAB[litCount].length = len;
+    LITTAB[litCount].address = -1;  
+    LITTAB[litCount].assigned = 0;
+
+    return litCount++;  
+}
